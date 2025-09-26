@@ -41,6 +41,7 @@ int main() {
 
 
 EJERCICIO 2
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -81,6 +82,7 @@ void countingSort(int A[], int n) {
 }
 
 
+int main() {
     int A[] = {4, 2, 2, 8, 3, 3, 1};
     int n = sizeof(A) / sizeof(A[0]);
 
@@ -94,4 +96,3 @@ void countingSort(int A[], int n) {
 
     return 0;
 }
-
