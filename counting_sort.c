@@ -81,4 +81,17 @@ void countingSort(int A[], int n) {
 }
 
 
+    int A[] = {4, 2, 2, 8, 3, 3, 1};
+    int n = sizeof(A) / sizeof(A[0]);
+
+    countingSort(A, n);
+
+    printf("Arreglo ordenado: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", A[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
 
