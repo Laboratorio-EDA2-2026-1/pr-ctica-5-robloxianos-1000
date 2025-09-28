@@ -1,16 +1,12 @@
 #include <stdio.h>
 
-
-
-
 int busquedaLineal(int arreglo[], int tamaño, int objetivo) {
-       int encontrado = -1; 
+    int encontrado = -1; 
     
     for(int i = 0; i < tamaño; i++) {
-       
         if(arreglo[i] == objetivo) {
             encontrado = i;  
-            printf("ENCONTRADO, POSICION: %i Sigue buscando\n", i);
+            printf("encontrado, posicion: %i Sigue buscando\n", i);
         }
     }
     
@@ -20,13 +16,10 @@ int busquedaLineal(int arreglo[], int tamaño, int objetivo) {
 
 
 
-
-int busquedaLienalMejorada(int arreglo[], int tamaño, int objetivo) {
+int busquedaLinealMejorada(int arreglo[], int tamaño, int objetivo) {
     for(int i = 0; i < tamaño; i++) {
-        
-        
         if(arreglo[i] == objetivo) {
-            printf("encontrado-RETORNA\n");
+            printf("encontrado-retorna\n");
             return i;  
         }
     }
@@ -75,39 +68,33 @@ int main() {
     int tamaño = 7;
     int objetivo = 25;
     
-    printf("BUSQUEDA LINEAL SIMPLE\n");
+    printf("-Busqueda lineal simple\n");
     int resultado1 = busquedaLineal(arreglo, tamaño, objetivo);
-    printf(" %i\n", resultado1);
+    printf("Resultado: %i\n", resultado1);
     
-    printf("BUSQUEDA LINEAL MEJORADO\n");
-    int resultado2 = busquedaLienalMejorada(arreglo, tamaño, objetivo);
-    printf(" %i\n", resultado2);
+    printf("-Busqueda lineal mejorada\n");
+    int resultado2 = busquedaLinealMejorada(arreglo, tamaño, objetivo);
+    printf("Resultado: %i\n", resultado2);
 
-
-       int numeros[] = {5, 3, 8, 6, 2, 9, 8};
+    int numeros[] = {5, 3, 8, 6, 2, 9, 8};
+    int tamaño2 = 7;  
     int buscado = 8;
 
-    int posicion = busquedaLinealRecursiva(numeros, tamaño, buscado, 0);
+    printf("-Busqueda lineal recursiva\n");
+    int posicion1 = busquedaLinealRecursiva(numeros, tamaño2, buscado, 0);
 
-    if (posicion != -1)
-        printf("el numero %i se encontro en la posicion %i\n", buscado, posicion);
+    if (posicion1 != -1)
+        printf("El numero %i se encontro en la posicion %i\n", buscado, posicion1);
     else
-        printf("el numero %i no se encontro en el arreglo\n", buscado);
+        printf("El numero %i no se encontro en el arreglo\n", buscado);
 
-    
+    printf("-Busqueda lineal centinela\n");
+    int posicion2 = busquedaLinealCentinela(numeros, tamaño2, buscado);
 
-    int posicion = busquedaLinealCentinela(numeros, tamaño, buscado);
-
-    if (posicion != -1)
-        printf("el numero %i se encontro en la posicion %i\n", buscado, posicion);
+    if (posicion2 != -1)
+        printf("El numero %i se encontro en la posicion %i\n", buscado, posicion2);
     else
-        printf("el numero %i no se encontro en el arreglo\n", buscado);
-
-
-
-
-       
+        printf("El numero %i no se encontro en el arreglo\n", buscado);
 
     return 0;
 }
-
