@@ -39,8 +39,7 @@ int main() {
 }
 
 
-
-EJERCICIO 2
+//ALGORITMO 
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -48,20 +47,61 @@ EJERCICIO 2
 void countingSort(int A[], int n) {
     if (n <= 0) return;
 
-    int max = A[0];
+int max = A[0];
     for (int i = 1; i < n; i++) {
         if (A[i] > max) {
             max = A[i];
         }
     }
-
-    int *C = (int *)calloc(max + 1, sizeof(int));
+int *C = (int *)calloc(max + 1, sizeof(int));
 
     for (int i = 0; i < n; i++) {
         C[A[i]]++;
     }
+    for (int i = 1; i <= max; i++) {
+        C[i] += C[i - 1];
+    }
+    int *B = (int *)malloc(n * sizeof(int));
 
-    
+    for (int i = n - 1; i >= 0; i--) {
+        B[C[A[i]] - 1] = A[i];
+        C[A[i]]--;
+    }
+    for (int i = 0; i < n; i++) {
+        A[i] = B[i];
+    }
+
+    free(C);
+    free(B);
+}
+//EJERCICIO 2
+#include <stdio.h>
+#include <stdlib.h>
+
+#define ROJO 0
+#define BLANCO 1
+#define AZUL 2
+
+int Examine(int A[], int i) {
+    return A[i];
+}
+
+void Swap(int A[], int i, int j) {
+    int temp = A[i];
+    A[i] = A[j];
+    A[j] = temp;
+}
+
+void countingSortColores(int A[], int n) {
+    if (n <= 0) return;
+
+    int max = 2;
+    int *C = (int *)calloc(max + 1, sizeof(int));
+
+    for (int i = 0; i < n; i++) {
+        C[Examine(A, i)]++;
+    }
+
     for (int i = 1; i <= max; i++) {
         C[i] += C[i - 1];
     }
@@ -69,8 +109,9 @@ void countingSort(int A[], int n) {
     int *B = (int *)malloc(n * sizeof(int));
 
     for (int i = n - 1; i >= 0; i--) {
-        B[C[A[i]] - 1] = A[i];
-        C[A[i]]--;
+        int color = Examine(A, i);
+        B[C[color] - 1] = color;
+        C[color]--;
     }
 
     for (int i = 0; i < n; i++) {
@@ -81,18 +122,26 @@ void countingSort(int A[], int n) {
     free(B);
 }
 
-
-int main() {
-    int A[] = {4, 2, 2, 8, 3, 3, 1};
-    int n = sizeof(A) / sizeof(A[0]);
-
-    countingSort(A, n);
-
-    printf("Arreglo ordenado: ");
+void mostrarArreglo(int arr[], int n) {
     for (int i = 0; i < n; i++) {
-        printf("%d ", A[i]);
+        if (arr[i] == ROJO) printf("ROJO ");
+        else if (arr[i] == BLANCO) printf("BLANCO ");
+        else if (arr[i] == AZUL) printf("AZUL ");
     }
     printf("\n");
+}
+
+int main() {
+    int colores[] = {AZUL, BLANCO, ROJO, ROJO, AZUL, BLANCO,AZUL,BLANCO, ROJO, AZUL,BLANCO, ROJO, BLANCO};
+    int n = sizeof(colores) / sizeof(colores[0]);
+
+    printf("Arreglo original: ");
+    mostrarArreglo(colores, n);
+
+    countingSortColores(colores, n);
+
+    printf("Arreglo ordenado: ");
+    mostrarArreglo(colores, n);
 
     return 0;
 }
